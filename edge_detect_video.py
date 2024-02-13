@@ -1,19 +1,26 @@
-from tkinter import image_types
 import cv2 as cv
 import numpy as np
-import time
 import sys
+
+min_area = 0
+max_area = 10000
+def filter(contours):
+    out = []
+    for i in range(len(contours)):
+        a = cv.contourArea(contours[i])
+        if(a > min_area and a < max_area):
+            out.append(contours[i])
+    return out
 
 canny_thresh = 12
 canny_ratio = 3 # per OpenCV recommendation
 dilation = 10
 erosion = 10
 blur_kernel = 6
-
 def edge_detect(img):
 
     # Avoid the program crashing because of a large amount of contours from canny
-    if(canny_thresh <= 1):
+    if(canny_thresh <= 1 or blur_kernel < 1):
         return np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)
 
     # Step 1 - blur the image to remove small imperfections from possible defects
@@ -45,6 +52,7 @@ def edge_detect(img):
 
     # Find the final contours, draw a bounding box on the original image
     final_contours,_ =  cv.findContours(hull_drawing, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+    final_contours = filter(final_contours)
     final_drawing = cv.copyTo(img, None)
     for i in range(len(final_contours)):
         x,y,w,h = cv.boundingRect(final_contours[i])
@@ -74,6 +82,7 @@ def edge_detect(img):
     return debug_frame
 
 
+
 cap = cv.VideoCapture(0)
 if not cap.isOpened():
     print("Failed to open camera :(")
@@ -98,10 +107,20 @@ def dilationTrackbar(newValue):
     global dilation
     dilation = newValue
 
+def minareaTrackbar(newValue):
+    global min_area
+    min_area = newValue
+
+def maxareaTrackbar(newValue):
+    global max_area
+    max_area = newValue
+
 cv.createTrackbar("canny thresh", "Contours", canny_thresh, 50, cannyThreshTrackbar)
 cv.createTrackbar("blur kernel", "Contours", blur_kernel, 100, kernelSizeTrackbar)
 cv.createTrackbar("dilation", "Contours", dilation, 50, dilationTrackbar)
 cv.createTrackbar("erosion", "Contours", erosion, 50, erosionTrackbar)
+cv.createTrackbar("min area", "Contours", min_area, 10000, minareaTrackbar)
+cv.createTrackbar("max area", "Contours", max_area, 10000, maxareaTrackbar)
 
 while(True):
     ret, image = cap.read()
