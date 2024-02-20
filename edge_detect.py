@@ -82,7 +82,7 @@ def edge_detect(img):
 
     return debug_frame
 
-image = cv.imread("/shared/ryan/Downloads/drywall.jpg")
+image = cv.imread("drywall.jpg")
 image = cv.resize(image, (0,0), fx=0.5, fy=0.5)
 
 cv.namedWindow("Contours")
