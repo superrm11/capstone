@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SystemProperties>
+  <SystemName>CRB15000_5_95</SystemName>
+  <SerialNo>VIRTUAL_CONTROLLER</SerialNo>
+  <UsedMedia>
+    <Media path="C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotOS_10.0.1" name="RobotOS" version="10.0.1+456" versionName="10.0.1"/>
+    <Media path="C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0" name="RobotControl" version="7.12.0+1369" versionName="7.12.0"/>
+    <Media path="C:/Users/ryan/AppData/Local/ABB/RobotWare/FlexPendant/Apps_1.13.0" name="FlexPendantSoftwareUpdate" version="1.13.0+1879" versionName="1.13.0"/>
+    <Media path="C:/Users/ryan/AppData/Local/ABB/RobotWare/Robots_1.12.0" name="Robots" version="1.12.0+146" versionName="1.12.0"/>
+    <Media path="C:/Users/ryan/AppData/Local/ABB/RobotWare/Wizard_1.5.2" name="Wizard" version="1.5.2" versionName="1.5.2"/>
+  </UsedMedia>
+  <ControlModule>
+    <Option descr="RobotControl Base"/>
+    <Option descr="English"/>
+    <Option descr="3120-1 FlexPendant Limited App Package"/>
+    <Option descr="3120-2 FlexPendant Essential App Package"/>
+    <Option descr="3151-1 FlexPendant Program Package"/>
+    <Option descr="Leadthrough"/>
+    <Option descr="3043-3 SafeMove Collaborative"/>
+    <Option descr="Safe Move Plug and Play"/>
+    <Option descr="No Category 0"/>
+    <Option descr="3044-2 Keyless Mode Switch, 2 modes"/>
+    <Option descr="System without axis computer"/>
+    <Option descr="Main computer M28.01"/>
+  </ControlModule>
+  <DriveModule>
+    <Name>Robot1</Name>
+    <Option descr="Motor Commutation"/>
+    <Option descr="Service Info System"/>
+    <Option descr="C30"/>
+    <Option descr="C30 Type A"/>
+    <Option descr="D7 (for CRB 15000)"/>
+  </DriveModule>
+  <AdditionalOption>
+    <Name>FlexPendantSoftwareUpdate</Name>
+  </AdditionalOption>
+  <AdditionalOption>
+    <Name>Robots</Name>
+    <Option descr="Robots Base"/>
+    <Option descr="CRB 15000-5/0.95"/>
+  </AdditionalOption>
+  <AdditionalOption>
+    <Name>Wizard</Name>
+    <Option descr="Wizard"/>
+  </AdditionalOption>
+</SystemProperties>

@@ -1,0 +1,52 @@
+>>SYSTEM_ID:
+VIRTUAL_CONTROLLER
+
+>>PRODUCTS_ID:
+RobotOS Version: 10.0.1
+RobotControl Version: 7.12.0
+FlexPendantSoftwareUpdate Version: 1.13.0
+Robots Version: 1.12.0
+Wizard Version: 1.5.2
+
+  RobotControl Base
+  English
+  3120-1 FlexPendant Limited App Package
+  3120-2 FlexPendant Essential App Package
+  3151-1 FlexPendant Program Package
+  Leadthrough
+  3043-3 SafeMove Collaborative
+  Safe Move Plug and Play
+  No Category 0
+  3044-2 Keyless Mode Switch, 2 modes
+  System without axis computer
+  Main computer M28.01
+  Motor Commutation
+  Service Info System
+  C30
+  C30 Type A
+  D7 (for CRB 15000)
+  Robots Base
+  CRB 15000-5/0.95
+  Wizard
+
+>>HOME:
+All public files and directories
+
+>>SYSPAR:
+SYS.cfg
+SIO.cfg
+PROC.cfg
+MMC.cfg
+MOC.cfg
+EIO.cfg
+
+
+
+>>TASK2: (T_ROB1,,)
+PROGMOD/Wizard_LoadData.modx @ 
+PROGMOD/Module1.modx @ 
+SYSMOD/Wizard_Params.sysx @ 
+PROGMOD/CalibData.modx @ 
+
+
+>>EOF:

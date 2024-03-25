@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Products version="1.1">
+  <Product id="abb.robotics.robotos" name="RobotOS" version="10.0.1+456" versionName="10.0.1" installPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotOS_10.0.1" productMediaPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotOS_10.0.1/RobotOS_10.0.1" manifestFile="abb.robotics.robotos.rmf" installationTime="2024-03-25 10:19:22"/>
+  <Product id="abb.robotics.robotcontrol" name="RobotControl" version="7.12.0+1369" versionName="7.12.0" installPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0" productMediaPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/RobotControl_7.12.0" manifestFile="abb.robotics.robotcontrol.rmf" installationTime="2024-03-25 10:19:22"/>
+  <Product id="abb.robotics.robots" name="Robots" version="1.12.0+146" versionName="1.12.0" installPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/Robots_1.12.0" productMediaPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/Robots_1.12.0/Robots_1.12.0" manifestFile="abb.robotics.robots.rmf" installationTime="2024-03-25 10:19:22"/>
+  <Product id="abb.cn.robotics.wizard" name="Wizard" version="1.5.2" versionName="1.5.2" installPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/Wizard_1.5.2" productMediaPath="C:/Users/ryan/AppData/Local/ABB/RobotWare/Wizard_1.5.2/Wizard_1.5.2" manifestFile="abb.cn.robotics.wizard_1.5.2.rmf" installationTime="2024-03-25 10:19:22"/>
+</Products>

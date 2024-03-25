@@ -125,4 +125,5 @@ cv.createTrackbar("min area", "Contours", min_area, 10000, minareaTrackbar)
 cv.createTrackbar("max area", "Contours", max_area, 10000, maxareaTrackbar)
 
 cv.imshow("Contours", edge_detect(image))
-cv.waitKey(0)
+while(cv.waitKey(0) != ord('q')):
+    pass

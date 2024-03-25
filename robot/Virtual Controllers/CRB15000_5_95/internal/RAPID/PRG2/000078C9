@@ -1,0 +1,72 @@
+MODULE Module1
+        CONST robtarget Home:=[[349.999998124,304.508785748,-424.400169313],[1,-0.000000012,0,0.000000002],[0,-1,0,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_20:=[[163.82,226.694,0],[0.965925826,0.258819045,0,0],[0,0,-1,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_30:=[[577.469,363.031,0],[0.965925826,0.258819045,0,0],[-1,-1,0,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_40:=[[354.533,512.021,0],[0.965925826,0.258819045,0,0],[-1,-1,0,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+!***********************************************************
+    !
+    ! Module:  Module1
+    !
+    ! Description:
+    !   <Insert description here>
+    !
+    ! Author: ryan
+    !
+    ! Version: 1.0
+    !
+    !***********************************************************
+    
+    
+    !***********************************************************
+    !
+    ! Procedure main
+    !
+    !   This is the entry point of your program
+    !
+    !***********************************************************
+    PROC main()
+        !Add your code here
+        Path_10;
+    ENDPROC
+    PROC Path_10()
+        ! Go to home position for camera
+        MoveL Home,v1000,z100,SpreaderEOT\WObj:=Wall;
+        
+        ! TODO
+        ! Command jetson to take image & process
+        ! Wait until done...
+        ! Use Socket to get defect coordinates (Replace targets in future)
+        
+        ! TODO Prime applicator here
+        
+        ! Defect 1
+        MoveL Offs(Target_20,0,-50,-10), v1000,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_20,0,-50,0), v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Target_20,v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_20,0,50,0), v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_20,0,50,-10), v1000,z100,SpreaderEOT\WObj:=Wall;
+        
+        ! TODO Prime applicator here (instead of home)
+        MoveL Home,v1000,z100,SpreaderEOT\WObj:=Wall;
+        
+        ! Defect 2
+        MoveL Offs(Target_30,0,-50,-10), v1000,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_30,0,-50,0), v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Target_30,v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_30,0,50,0), v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_30,0,50,-10), v1000,z100,SpreaderEOT\WObj:=Wall;
+        
+        ! TODO Prime applicator here (instead of home)
+        MoveL Home,v1000,z100,SpreaderEOT\WObj:=Wall;
+        
+        ! Defect 3
+        MoveL Offs(Target_40,0,-50,-10), v1000,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_40,0,-50,0), v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Target_40,v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_40,0,50,0), v100,z100,SpreaderEOT\WObj:=Wall;
+        MoveL Offs(Target_40,0,50,-10), v1000,z100,SpreaderEOT\WObj:=Wall;
+        
+        ! Prepare for next move
+        MoveL Home,v1000,z100,SpreaderEOT\WObj:=Wall;
+    ENDPROC
+ENDMODULE

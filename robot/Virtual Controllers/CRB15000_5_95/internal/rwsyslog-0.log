@@ -1,0 +1,61 @@
+<9>Mar 18 20:08:38 CRB15000_5_95 ABB-UAL:01:Security log file deleted by user|-|syslog.log not found|3420|00001|-|robot|syslog	1
+<13>Mar 18 20:08:39 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=65537|1110|00002|-|robot|NativeUser	2
+<13>Mar 18 20:08:40 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=131074|1110|00003|-|robot|NativeUser	3
+<13>Mar 18 20:08:40 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=196611|1110|00004|-|robot|NativeUser	4
+<13>Mar 18 20:08:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=262148|1110|00005|-|robot|NativeUser	5
+<13>Mar 18 20:08:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=327685|1110|00006|-|robot|NativeUser	6
+<13>Mar 18 20:08:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=393222|1110|00007|-|robot|NativeUser	7
+<13>Mar 18 20:08:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=458759|1110|00008|-|robot|NativeUser	8
+<13>Mar 18 20:08:45 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=524296|1110|00009|-|robot|Admin	9
+<13>Mar 18 20:08:45 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=589833|1110|00010|-|robot|Admin	10
+<13>Mar 18 22:06:13 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=589833|1210|00011|-|robot|	11
+<13>Mar 18 22:06:13 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=524296|1210|00012|-|robot|	12
+<13>Mar 18 22:06:13 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|Socket=2800|1210|00013|-|robot|	13
+<13>Mar 25 10:15:53 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=65537|1110|00014|-|robot|NativeUser	14
+<13>Mar 25 10:15:53 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=131074|1110|00015|-|robot|NativeUser	15
+<13>Mar 25 10:15:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=196611|1110|00016|-|robot|NativeUser	16
+<13>Mar 25 10:15:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=262148|1110|00017|-|robot|NativeUser	17
+<13>Mar 25 10:15:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=327685|1110|00018|-|robot|NativeUser	18
+<13>Mar 25 10:15:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=393222|1110|00019|-|robot|NativeUser	19
+<13>Mar 25 10:15:58 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=458759|1110|00020|-|robot|Admin	20
+<13>Mar 25 10:15:58 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=524296|1110|00021|-|robot|Admin	21
+<13>Mar 25 10:16:55 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=524296|1210|00022|-|robot|	22
+<13>Mar 25 10:16:55 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=458759|1210|00023|-|robot|	23
+<13>Mar 25 10:16:55 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|Socket=3036|1210|00024|-|robot|	24
+<9>Mar 25 10:19:28 CRB15000_5_95 ABB-UAL:01:Log data hash check failed (Log data altered)|-|invalid digest syslog.log|3220|00025|-|robot|syslog	25
+<13>Mar 25 10:19:29 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=65537|1110|00026|-|robot|NativeUser	26
+<13>Mar 25 10:19:30 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=131074|1110|00027|-|robot|NativeUser	27
+<13>Mar 25 10:19:30 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=196611|1110|00028|-|robot|NativeUser	28
+<13>Mar 25 10:19:30 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=262148|1110|00029|-|robot|NativeUser	29
+<13>Mar 25 10:19:30 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=327685|1110|00030|-|robot|NativeUser	30
+<13>Mar 25 10:19:30 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=393222|1110|00031|-|robot|NativeUser	31
+<13>Mar 25 10:19:31 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=458759|1110|00032|-|robot|NativeUser	32
+<13>Mar 25 10:19:37 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=524296|1110|00033|-|robot|Default User	33
+<13>Mar 25 10:19:37 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=589833|1110|00034|-|robot|Default User	34
+<13>Mar 25 10:19:37 CRB15000_5_95 ABB-UAL:01:Configuration upload|-|Start restore|1331|00035|-|robot|524296	35
+<13>Mar 25 10:19:40 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=65537|1110|00036|-|robot|NativeUser	36
+<13>Mar 25 10:19:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=131074|1110|00037|-|robot|NativeUser	37
+<13>Mar 25 10:19:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=196611|1110|00038|-|robot|NativeUser	38
+<13>Mar 25 10:19:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=262148|1110|00039|-|robot|NativeUser	39
+<13>Mar 25 10:19:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=327685|1110|00040|-|robot|NativeUser	40
+<13>Mar 25 10:19:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=393222|1110|00041|-|robot|NativeUser	41
+<13>Mar 25 10:19:41 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=458759|1110|00042|-|robot|NativeUser	42
+<13>Mar 25 10:19:45 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=524296|1110|00043|-|robot|Default User	43
+<13>Mar 25 10:19:45 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=589833|1110|00044|-|robot|Default User	44
+<13>Mar 25 10:19:50 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=589833|1210|00045|-|robot|	45
+<13>Mar 25 10:19:50 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=524296|1210|00046|-|robot|	46
+<13>Mar 25 10:19:50 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|Socket=2816|1210|00047|-|robot|	47
+<13>Mar 25 10:19:53 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=65537|1110|00048|-|robot|NativeUser	48
+<13>Mar 25 10:19:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=131074|1110|00049|-|robot|NativeUser	49
+<13>Mar 25 10:19:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=196611|1110|00050|-|robot|NativeUser	50
+<13>Mar 25 10:19:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=262148|1110|00051|-|robot|NativeUser	51
+<13>Mar 25 10:19:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=327685|1110|00052|-|robot|NativeUser	52
+<13>Mar 25 10:19:54 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=393222|1110|00053|-|robot|NativeUser	53
+<13>Mar 25 10:19:57 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=458759|1110|00054|-|robot|Admin	54
+<13>Mar 25 10:19:57 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=524296|1110|00055|-|robot|Admin	55
+<13>Mar 25 10:20:00 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=524296|1210|00056|-|robot|	56
+<13>Mar 25 10:20:00 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=458759|1210|00057|-|robot|	57
+<13>Mar 25 10:20:00 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|Socket=616|1210|00058|-|robot|	58
+-----BEGIN DIGEST-----
+5UQgLsuK8EzaYlYzPuOrCe9No40e1TBvVjkTwoZhlXqTeTKeLdVxgT3anrUUHy3FWKlT6Q==
+-----END DIGEST-----

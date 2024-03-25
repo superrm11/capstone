@@ -1,0 +1,471 @@
+
+Script begin: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/system/startup.cmd
+19:00:00:36012 Status 0 from if_feature_present abb.robotics.robotcontrol.controllerhw.axiscomputer.none
+
+Script begin: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/system/startup_with_axc.cmd
+19:00:00:36015 Status 0 from startup_log
+Begin system startup
+19:00:00:36018 Status 0 from echo
+19:00:00:36020 Status 0 from invoke2 s17_initialize
+19:00:00:36022 Status 0 from invoke AxcHal_InitModule
+19:00:00:36024 Status 0 from invoke AxcHal_StartModule
+19:00:04:36000 Status 0 from delay
+E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/TEMP has been mounted.
+19:00:04:36003 Status 0 from baseinit
+Goto to label: NO_ASCII_LOG
+19:00:04:36006 Status 0 from getkey ASCIILogMedia
+19:00:04:36008 Status 0 from uprobe_init
+19:00:04:36010 Status 0 from debug_service_base_init
+19:00:04:36012 Status 0 from invoke S33_01_create
+19:00:04:36014 Status 0 from S33_01_init
+19:00:04:36016 Status 0 from invoke AxcServoControl_InitModule
+Goto to label: VC_MCHEXCEPTION_SKIP
+19:00:04:36019 Status 0 from ifvc VC_MCHEXCEPTION_SKIP
+19:00:04:36021 Status 0 from invoke S98_01_create
+19:00:04:36023 Status 0 from S98_01_init
+Loading Safety Controller images
+19:00:04:36026 Status 0 from echo
+19:00:04:36028 Status 0 from invoke scinit_load_and_start_safety_controller
+Goto to label: VC_SEP_SKIP
+19:00:04:36031 Status 0 from ifvc VC_SEP_SKIP
+Goto to label: VC_CS_SKIP
+19:00:04:36034 Status 0 from ifvc VC_CS_SKIP
+19:00:04:36036 Status 0 from bb_populate
+19:00:04:36038 Status 0 from bb_populate
+19:00:04:36040 Status 0 from bb_populate
+19:00:04:36042 Status 0 from bb_populate
+19:00:04:36044 Status 0 from bb_populate
+19:00:04:36046 Status 0 from bb_populate
+19:00:04:36048 Status 0 from bb_populate
+19:00:04:36050 Status 0 from bb_populate
+19:00:04:36052 Status 0 from bb_populate
+19:00:04:36054 Status 0 from bb_populate
+19:00:04:36056 Status 0 from bb_populate
+19:00:04:36058 Status 0 from bb_populate
+19:00:04:36060 Status 0 from sysdmp_init
+19:00:04:36062 Status 0 from task 
+19:00:04:36064 Status 0 from debug_service_init
+19:00:04:36066 Status 0 from sysdmp_add
+19:00:04:36068 Status 0 from sysdmp_add
+19:00:04:36070 Status 0 from sysdmp_add
+19:00:04:36072 Status 0 from sysdmp_add
+19:00:04:36074 Status 0 from sysdmp_add
+19:00:04:36076 Status 0 from sysdmp_add
+19:00:04:36078 Status 0 from sysdmp_add
+Goto to label: NO_WVLOG
+19:00:04:36081 Status 0 from ifvc NO_WVLOG
+Goto to label: NO_ETHCAP
+19:00:04:36084 Status 0 from ifvc NO_ETHCAP
+19:00:04:36086 Status 0 from sysdmp_add
+19:00:04:36088 Status 0 from sysdmp_add
+19:00:04:36090 Status 0 from sysdmp_add
+19:00:04:36092 Status 0 from task 
+19:00:04:42000 Status 0 from synchronize task
+19:00:04:42002 Status 0 from go task
+19:00:04:42004 Status 0 from task 
+19:00:04:42006 Status 0 from task 
+19:00:04:42008 Status 0 from task 
+Goto to label: VC_NO_CLOCK_PROBE
+19:00:04:42011 Status 0 from ifvc VC_NO_CLOCK_PROBE
+[94m
+24-03-25  10:19:53 MC0: type = STATE_CHANGE id = Operational code = 45 (10045)
+[37m
+19:00:04:42017 Status 0 from basenew
+Base services started
+19:00:04:42020 Status 0 from echo
+Goto to label: VC_NO_REMOTE_DIAGNOSTIC
+19:00:04:42023 Status 0 from ifvc VC_NO_REMOTE_DIAGNOSTIC
+19:00:04:42025 Status 0 from S98_01_new
+19:00:04:42027 Status 0 from direxist E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/TEMP/rw_trash
+Goto to label: NEXT_STEP
+19:00:04:42030 Status 0 from goto NEXT_STEP
+Initializing system interrupts
+19:00:04:42033 Status 0 from print
+19:00:04:42035 Status 0 from invoke AxcServoControl_StartModule
+19:00:07:42000 Status 0 from delay
+Goto to label: VC_NO_MC_SEP_UPGRADE
+19:00:07:42003 Status 0 from ifvc VC_NO_MC_SEP_UPGRADE
+Goto to label: VC_NO_MC_CS_UPGRADE
+19:00:07:42006 Status 0 from ifvc VC_NO_MC_CS_UPGRADE
+Goto to label: VC_NO_MC_FPGA_UPGRADE
+19:00:07:42009 Status 0 from ifvc VC_NO_MC_FPGA_UPGRADE
+19:00:07:42011 Status 0 from invoke fciInit
+19:00:07:42014 Status 0 from init eio
+19:00:07:42016 Status 0 from invoke internalBusDrv
+19:00:07:42018 Status 0 from task 
+19:00:07:42020 Status 0 from task 
+19:00:07:42022 Status 0 from invoke incInstallDriver
+Goto to label: LOAD_CMD
+19:00:07:42025 Status 0 from fileexist C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/options/enms/en_base.cmd
+
+Script begin: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/options/enms/en_base.cmd
+19:00:07:42028 Status 0 from sysdmp_add
+19:00:07:42030 Status 0 from task 
+19:00:07:42032 Status 0 from task 
+19:00:07:42034 Status 0 from task 
+19:00:07:42036 Status 0 from invoke incInstallDriver
+Script end: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/options/enms/en_base.cmd
+19:00:07:42039 Status 0 from include 
+Goto to label: NO_BONJOUR_DAEMON
+19:00:07:42042 Status 0 from ifvc NO_BONJOUR_DAEMON
+19:00:07:42044 Status 0 from invoke2 init_mempools
+19:00:07:42046 Status 0 from task 
+19:00:07:42049 Status 0 from task 
+19:00:07:42052 Status 0 from task 
+19:00:07:42055 Status 0 from task 
+19:00:07:42057 Status 0 from task 
+Starting features - phase 1 of 5
+19:00:07:42060 Status 0 from echo
+Goto to label: LOAD_CMD
+19:00:07:42063 Status 0 from fileexist E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/opt_l0.cmd
+
+Script begin: E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/opt_l0.cmd
+
+Script begin: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/options/sc/ScInc_opt.cmd
+Starting ScIncTasks and installs the driver/networks
+19:00:07:42068 Status 0 from echo
+19:00:07:42070 Status 0 from task 
+19:00:07:42072 Status 0 from task 
+19:00:07:42074 Status 0 from invoke incInstallDriver
+End of ScIncTasks installation
+19:00:07:42077 Status 0 from echo
+Script end: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/options/sc/ScInc_opt.cmd
+19:00:07:42080 Status 0 from include End of ScIncTasks installation
+Script end: E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/opt_l0.cmd
+19:00:07:42083 Status 0 from include End of ScIncTasks installation
+19:00:07:42086 Status 0 from init motion
+19:00:07:42090 Status 0 from init rol
+19:00:07:42094 Status 0 from init cab
+19:00:07:42096 Status 0 from init bar
+19:00:07:42098 Status 0 from init pgmrun
+19:00:07:42101 Status 0 from init rapid
+19:00:07:42103 Status 0 from init puscfg
+19:00:07:42105 Status 0 from invoke sdlog_init
+19:00:07:42107 Status 0 from task 
+Goto to label: VC_CABSUPTS_SKIP
+19:00:07:42110 Status 0 from ifvc VC_CABSUPTS_SKIP
+19:00:07:42113 Status 0 from invoke2 sevt_safety_init
+19:00:07:42115 Status 0 from invoke2 scsafIntBusInit
+19:00:07:42117 Status 0 from invoke2 epanel_device_init
+19:00:07:42119 Status 0 from invoke2 axc_brd_create_IntBusDrvSys
+19:00:07:42121 Status 0 from task 
+19:00:07:42123 Status 0 from task 
+19:00:07:42125 Status 0 from task 
+19:00:07:42127 Status 0 from task 
+19:00:07:42132 Status 0 from reconfigure eio
+Starting Safety Controller orchestrator
+19:00:07:42135 Status 0 from echo
+19:00:07:42137 Status 0 from task 
+  Cpu1 in state ready
+19:00:20:902000 Status 0 from invoke2 scorch_wait_for_early_setup_done
+19:00:20:902002 Status 0 from task 
+19:00:20:902004 Status 0 from task 
+19:00:20:902006 Status 0 from task 
+19:00:20:902008 Status 0 from task 
+19:00:20:902010 Status 0 from task 
+19:00:20:902012 Status 0 from task 
+19:00:20:902014 Status 0 from task 
+19:00:20:902016 Status 0 from task 
+19:00:20:902018 Status 0 from task 
+19:00:20:902020 Status 0 from task 
+19:00:20:902022 Status 0 from task 
+19:00:20:902024 Status 0 from task 
+19:00:20:902026 Status 0 from task 
+19:00:20:902028 Status 0 from task 
+19:00:20:902030 Status 0 from task 
+19:00:20:902032 Status 0 from task 
+19:00:20:902034 Status 0 from task 
+19:00:20:902036 Status 0 from task 
+19:00:20:902038 Status 0 from task 
+19:00:20:902040 Status 0 from task 
+19:00:20:902042 Status 0 from task 
+19:00:20:902044 Status 0 from task 
+19:00:20:902046 Status 0 from task 
+19:00:20:902048 Status 0 from task 
+19:00:20:902050 Status 0 from task 
+19:00:20:902052 Status 0 from task 
+19:00:20:902054 Status 0 from task 
+Goto to label: VC_AXC_SKIP
+19:00:20:902062 Status 0 from ifvc VC_AXC_SKIP
+19:00:20:902064 Status 0 from task 
+19:00:20:902066 Status 0 from task 
+19:00:20:902068 Status 0 from task 
+19:00:20:902070 Status 0 from task 
+19:00:20:902072 Status 0 from task 
+19:00:20:902074 Status 0 from task 
+19:00:20:902076 Status 0 from task 
+19:00:20:902078 Status 0 from task 
+19:00:20:902080 Status 0 from task 
+19:00:20:902082 Status 0 from task 
+19:00:20:902084 Status 0 from task 
+19:00:20:902086 Status 0 from task 
+19:00:20:902088 Status 0 from task 
+19:00:20:902090 Status 0 from task 
+19:00:20:902092 Status 0 from task 
+19:00:20:902094 Status 0 from task 
+19:00:20:902096 Status 0 from task 
+19:00:20:902099 Status 0 from task 
+19:00:20:902102 Status 0 from task 
+19:00:20:902105 Status 0 from task 
+19:00:20:902108 Status 0 from task 
+19:00:20:902111 Status 0 from task 
+19:00:20:902113 Status 0 from task 
+19:00:20:902116 Status 0 from task 
+19:00:20:902118 Status 0 from task 
+19:00:20:902120 Status 0 from task 
+19:00:20:902123 Status 0 from task 
+Waiting for task group 1 to start
+19:00:20:902126 Status 0 from print
+19:00:20:908000 Status 0 from synchronize task
+19:00:21:408000 Status 0 from delay
+Rapi-Subscription running on slot: 204
+Message (cmd/msgType: 299/3) received from sid: 0
+19:00:21:408012 Status 0 from go task
+Goto to label: VC_AXC_SKIP
+19:00:21:408015 Status 0 from ifvc VC_AXC_SKIP
+Starting features - phase 2 of 5
+19:00:21:408018 Status 0 from echo
+19:00:21:408020 Status 0 from fileexist E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/option.cmd
+Goto to label: NEXT_STEP
+19:00:21:408023 Status 0 from goto NEXT_STEP
+Starting motion system
+19:00:21:408026 Status 0 from echo
+Simulated moc_io.
+Message (cmd/msgType: 299/3) received from sid: 0
+STATMATS. New motion_planner: motion_planner_1
+STATMATS. New motion_planner: motion_planner_2
+STATMATS. New motion_planner: motion_planner_3
+STATMATS. New motion_planner: motion_planner_4
+STATMATS. New motion_planner: motion_planner_5
+STATMATS. New motion_planner: motion_planner_6
+STATMATS. New motion_planner: motion_planner_7
+19:00:23:295000 Status 0 from new motion
+SISMA_BS_INFO 41152
+19:00:24:795000 Status 0 from delay
+19:00:24:795002 Status 0 from connect_dependings SYS_STORED_OBJ_CAB
+19:00:24:795004 Status 0 from if SYNCROB
+Goto to label: NOSYNC
+19:00:24:795007 Status 0 from goto NOSYNC
+Waiting for motion system to start
+19:00:24:795010 Status 0 from echo
+19:00:24:801000 Status 0 from synchronize task
+Message (cmd/msgType: 299/3) received from sid: 0
+Message (cmd/msgType: 299/3) received from sid: 0
+Message (cmd/msgType: 299/3) received from sid: 0
+19:00:24:801019 Status 0 from go task
+Synchronizing industrial networks
+19:00:24:801022 Status 0 from echo
+19:00:24:801048 Status 0 from io_synchronize
+Goto to label: VIRTIOTS_RUN
+19:00:24:801051 Status 0 from ifvc VIRTIOTS_RUN
+19:00:24:801053 Status 0 from task 
+Starting RAPID system
+19:00:24:801056 Status 0 from echo
+19:00:24:801066 Status 0 from invoke rldryrun_start
+19:00:24:801071 Status 0 from invoke rlcyclic_start
+19:00:24:801076 Status 13 from invoke rlvisualize_start
+19:00:24:801078 Status 0 from invoke rldata_init
+Message (cmd/msgType: 299/3) received from sid: 0
+------------number_of_tasks 2 
+------------number_of_tasks 2 
+Message (cmd/msgType: 299/3) received from sid: 0
+Message (cmd/msgType: 299/3) received from sid: 0
+19:00:25:306007 Status 0 from new rapid
+Starting features - phase 3 of 5
+19:00:25:306010 Status 0 from echo
+19:00:25:306012 Status 0 from fileexist E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/opt_l1.cmd
+Goto to label: NEXT_STEP
+19:00:25:306015 Status 0 from goto NEXT_STEP
+[93m
+24-03-25  10:19:54 SC CPUA: type = WARNING id = Safety code = 526 (90526)
+[37m
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 10 (10010)
+[37m
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 17 (10017)
+[37m
+19:00:29:767057 Status 0 from new cab
+Starting communication services
+19:00:29:767060 Status 0 from echo
+19:00:29:767062 Status 0 from invoke2 set_max_allowed_robapi_wan_connections
+19:00:29:767064 Status 0 from task 
+19:00:29:767066 Status 0 from task 
+19:00:29:767071 Status 0 from task 
+19:00:29:767073 Status 0 from task 
+19:00:29:767075 Status 0 from task 
+19:00:29:767077 Status 0 from task 
+19:00:29:767079 Status 0 from task 
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 2 (10002)
+arg 0: 1 arg 1: 0 
+arg 2: SC_CBC
+[37m
+19:00:29:767088 Status 0 from task 
+19:00:29:767090 Status 0 from task 
+19:00:29:767092 Status 0 from task 
+19:00:29:767094 Status 0 from task 
+19:00:29:767096 Status 0 from task 
+19:00:29:767098 Status 0 from task 
+Starting features - phase 4 of 5
+19:00:29:767101 Status 0 from echo
+19:00:29:767103 Status 0 from fileexist E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/opt_l2.cmd
+Goto to label: NEXT_STEP
+19:00:29:767106 Status 0 from goto NEXT_STEP
+19:00:29:767109 Status 0 from task 
+Goto to label: NETSCANSKIP
+19:00:29:767112 Status 0 from ifvc NETSCANSKIP
+Finalizing RAPID system
+19:00:29:767115 Status 0 from echo
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 150 (10150)
+arg 0: 1 
+arg 1: SC_CBC
+[37m
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 150 (10150)
+arg 0: 2 
+arg 1: T_ROB1
+[37m
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 129 (10129)
+arg 0: 1 
+arg 1: SC_CBC
+[37m
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 2 (10002)
+arg 0: 2 arg 1: 0 
+arg 2: T_ROB1
+[37m
+[94m
+24-03-25  10:19:54 MC0: type = STATE_CHANGE id = Operational code = 150 (10150)
+arg 0: 1 
+arg 1: SC_CBC
+[37m
+19:00:29:773000 Status 0 from synchronize task
+19:00:29:773002 Status 0 from rapid_startup_ready
+19:00:29:773004 Status 0 from cab_startup_ready
+Task OPCUAEntryFunc is about to terminate but is registered in Virtual Time. The task will remain in sleeping state
+Message (cmd/msgType: 299/3) received from sid: 0
+Message (cmd/msgType: 299/3) received from sid: 0
+Message (cmd/msgType: 299/3) received from sid: 0
+19:00:29:773022 Status 0 from go task
+Goto to label: VTSPEED
+19:00:29:773025 Status 0 from ifvc VTSPEED
+19:00:29:773027 Status 0 from invoke VTSetSpeed
+Starting features - phase 1 of 5
+19:00:29:773030 Status 0 from echo
+19:00:29:773032 Status 0 from fileexist E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/opt_l3.cmd
+Goto to label: NEXT_STEP
+19:00:29:773035 Status 0 from goto NEXT_STEP
+19:00:29:773037 Status 0 from upgrade_warm_start_completed
+19:00:29:773039 Status 0 from unofficial_rw_notification
+19:00:29:773041 Status 0 from sysdmp_add
+19:00:29:773043 Status 0 from sysdmp_add
+19:00:29:773045 Status 0 from sysdmp_add
+19:00:29:773047 Status 0 from sysdmp_add
+19:00:29:773049 Status 0 from sysdmp_add
+19:00:29:773051 Status 0 from sysdmp_add
+19:00:29:773053 Status 0 from sysdmp_add
+19:00:29:773055 Status 0 from sysdmp_add
+19:00:29:773057 Status 0 from sysdmp_add
+19:00:29:773059 Status 0 from sysdmp_add
+19:00:29:773061 Status 0 from sysdmp_add
+19:00:29:773063 Status 0 from sysdmp_add
+19:00:29:773065 Status 0 from sysdmp_add
+19:00:29:773067 Status 0 from sysdmp_add
+19:00:29:773069 Status 0 from sysdmp_add
+19:00:29:773071 Status 0 from sysdmp_add
+19:00:29:773073 Status 0 from sysdmp_add
+19:00:29:773075 Status 0 from sysdmp_add
+19:00:29:773077 Status 0 from sysdmp_add
+19:00:29:773079 Status 0 from sysdmp_add
+19:00:29:773081 Status 0 from sysdmp_add
+19:00:29:773083 Status 0 from sysdmp_add
+19:00:29:773085 Status 0 from sysdmp_add
+19:00:29:773087 Status 0 from sysdmp_add
+19:00:29:773089 Status 0 from sysdmp_add
+19:00:29:773091 Status 0 from sysdmp_add
+19:00:29:773093 Status 0 from sysdmp_add
+19:00:29:773095 Status 0 from sysdmp_add
+19:00:29:773097 Status 0 from sysdmp_add
+Goto to label: NO_SEP_DIAG
+19:00:29:773100 Status 0 from ifvc NO_SEP_DIAG
+19:00:29:773102 Status 0 from sysdmp_add
+19:00:29:773104 Status 0 from sysdmp_add
+19:00:29:773106 Status 0 from sysdmp_add
+Goto to label: NO_CHKDSK
+19:00:29:773109 Status 0 from ifvc NO_CHKDSK
+19:00:29:773111 Status 0 from sysdmp_add
+19:00:29:773113 Status 0 from sysdmp_add
+19:00:29:773115 Status 0 from sysdmp_add
+19:00:29:773117 Status 0 from sysdmp_add
+Goto to label: NEXT_STEP
+19:00:29:773120 Status 0 from goto NEXT_STEP
+19:00:29:773122 Status 0 from sysdmp_add
+19:00:29:773124 Status 0 from sysdmp_trigger_add
+19:00:29:773126 Status 0 from sysdmp_trigger_add
+19:00:29:773128 Status 0 from sysdmp_trigger_add
+19:00:29:773130 Status 0 from sysdmp_trigger_add
+19:00:29:773132 Status 0 from sysdmp_trigger_add
+19:00:29:773134 Status 0 from sysdmp_trigger_add
+19:00:29:773136 Status 0 from sysdmp_trigger_add
+19:00:29:773138 Status 0 from sysdmp_trigger_add
+19:00:29:773140 Status 0 from sysdmp_trigger_add
+19:00:29:773142 Status 0 from sysdmp_trigger_add
+19:00:29:773144 Status 0 from sysdmp_trigger_add
+19:00:29:773146 Status 0 from sysdmp_trigger_add
+19:00:29:773148 Status 0 from sysdmp_trigger_add
+19:00:29:773150 Status 0 from sysdmp_trigger_add
+19:00:29:773152 Status 0 from sysdmp_trigger_add
+19:00:29:773154 Status 0 from sysdmp_add_logfile
+19:00:29:773156 Status 0 from sysdmp_add_logfile
+19:00:29:773158 Status 0 from sysdmp_add_logfile
+19:00:29:773160 Status 0 from sysdmp_add_logfile
+19:00:29:773162 Status 0 from sysdmp_add_logfile
+19:00:29:773164 Status 0 from sysdmp_add_logfile
+19:00:29:773166 Status 0 from sysdmp_add_logfile
+19:00:29:773168 Status 0 from sysdmp_add_logfile
+19:00:29:773170 Status 0 from sysdmp_add_logfile
+19:00:29:773172 Status 0 from sysdmp_add_logfile
+19:00:29:773174 Status 0 from sysdmp_add_logfile
+19:00:29:773176 Status 0 from sysdmp_add_logfile
+19:00:29:773178 Status 0 from sysdmp_add_logfile
+19:00:29:773180 Status 0 from sysdmp_add_logfile
+19:00:29:773182 Status 0 from sysdmp_add_logfile
+19:00:29:773184 Status 0 from sysdmp_add_logfile
+19:00:29:773186 Status 0 from sysdmp_add_logfile
+19:00:29:773188 Status 0 from sysdmp_add_logfile
+19:00:29:773190 Status 0 from sysdmp_add_logfile
+19:00:29:773192 Status 0 from sysdmp_add_logfile
+19:00:29:773194 Status 0 from sysdmp_add_logfile
+19:00:29:773196 Status 0 from sysdmp_add_logfile
+19:00:29:773198 Status 0 from sysdmp_add_logfile
+19:00:29:773200 Status 0 from sysdmp_add_logfile
+Message (cmd/msgType: 299/3) received from sid: 0
+Message (cmd/msgType: 299/3) received from sid: 0
+Message (cmd/msgType: 299/3) received from sid: 0
+19:00:29:773202 Status 0 from sysdmp_add_logfile
+19:00:29:783000 Status 0 from sysdmp_add_logfile
+19:00:29:783002 Status 0 from sysdmp_add_logfile
+19:00:29:783004 Status 0 from sysdmp_add_logfile
+19:00:29:783006 Status 0 from sysdmp_add
+19:00:29:783008 Status 0 from sysdmp_add
+Goto to label: VC_CS_SHOW_SKIP
+19:00:29:783011 Status 0 from ifvc VC_CS_SHOW_SKIP
+19:00:29:783013 Status 0 from invoke fpevent_init
+19:00:29:783016 Status 0 from invoke fpcmd_init
+19:00:29:783019 Status 0 from invoke fpconsole_init
+19:00:29:783023 Status 0 from invoke fpdbg_init
+19:00:29:783025 Status 0 from invoke fpdevices_init
+19:00:29:783027 Status 0 from systemrun
+System started
+19:00:29:783030 Status 0 from echo
+19:00:29:783032 Status 0 from fileexist E:/ryan/Documents/workspace/python/capstone/robot/Virtual Controllers/CRB15000_5_95/internal/post_startup_action.cmd
+Goto to label: NO_POST_ACTION
+19:00:29:783035 Status 0 from goto NO_POST_ACTION
+Script end: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/system/startup_with_axc.cmd
+19:00:29:783038 Status 0 from include NO_POST_ACTION
+Goto to label: END
+19:00:29:783041 Status 0 from goto END
+Script end: C:/Users/ryan/AppData/Local/ABB/RobotWare/RobotControl_7.12.0/system/startup.cmd
