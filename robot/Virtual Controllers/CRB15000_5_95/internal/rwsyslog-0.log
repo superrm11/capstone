@@ -56,6 +56,19 @@
 <13>Mar 25 10:20:00 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=524296|1210|00056|-|robot|	56
 <13>Mar 25 10:20:00 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=458759|1210|00057|-|robot|	57
 <13>Mar 25 10:20:00 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|Socket=616|1210|00058|-|robot|	58
+<13>Mar 25 10:34:00 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=65537|1110|00059|-|robot|NativeUser	59
+<13>Mar 25 10:34:00 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=131074|1110|00060|-|robot|NativeUser	60
+<13>Mar 25 10:34:00 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=196611|1110|00061|-|robot|NativeUser	61
+<13>Mar 25 10:34:00 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=262148|1110|00062|-|robot|NativeUser	62
+<13>Mar 25 10:34:00 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=327685|1110|00063|-|robot|NativeUser	63
+<13>Mar 25 10:34:00 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=393222|1110|00064|-|robot|NativeUser	64
+<13>Mar 25 10:34:03 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=458759|1110|00065|-|robot|Admin	65
+<13>Mar 25 10:34:03 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=524296|1110|00066|-|robot|Admin	66
+<13>Mar 25 11:27:24 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=524296|1210|00067|-|robot|	67
+<13>Mar 25 11:27:24 CRB15000_5_95 ABB-UAL:01:Log-in successful|-|UAS_UID=589832|1110|00068|-|robot|Admin	68
+<13>Mar 25 11:46:57 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=589832|1210|00069|-|robot|	69
+<13>Mar 25 11:46:57 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|UAS_UID=458759|1210|00070|-|robot|	70
+<13>Mar 25 11:46:57 CRB15000_5_95 ABB-UAL:01:Log-out (user logged out)|-|Socket=732|1210|00071|-|robot|	71
 -----BEGIN DIGEST-----
-5UQgLsuK8EzaYlYzPuOrCe9No40e1TBvVjkTwoZhlXqTeTKeLdVxgT3anrUUHy3FWKlT6Q==
+3RlUK2phMH5zXn8HLI9uXC52E+pLWG6EgkaqfXreB4nDN2Azuo8/xTWk8N3A8kv7T329gQ==
 -----END DIGEST-----
