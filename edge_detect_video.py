@@ -2,8 +2,8 @@ import cv2 as cv
 import numpy as np
 import sys
 
-min_area = 0
-max_area = 10000
+min_area = 650
+max_area = 3000
 def filter(contours):
     out = []
     for i in range(len(contours)):

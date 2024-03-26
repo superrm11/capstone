@@ -2,7 +2,39 @@
 import cv2 as cv
 import numpy as np
 
+def filter(contours):
+    min_area = 650
+    max_area = 3000
+    out = []
+    for i in range(len(contours)):
+        a = cv.contourArea(contours[i])
+        if(a > min_area and a < max_area):
+            out.append(contours[i])
+    return out
 
+def pinhole_calcs(blob:tuple[int, int, int]) -> tuple [int, int, int]:
+    """Calculates the position & area of a blob in millimeters, given
+    pixel measurements.
+
+    Args:
+        blob (tuple[int, int, int]): (x, y, area) in px, px, px^2
+
+    Returns:
+        tuple [int, int, int]: (x, y, area) in mm, mm, mm^2
+    """
+    dist=70 # mm from board
+    foclen = 595 # mm, calculated as needed
+    # 36 dist between points
+    # 68 dist to board
+    # pt 1: 175, 210
+    # pt 2: 490, 216
+    
+
+    x = blob[0] * dist / foclen
+    y = blob[1] * dist / foclen
+    a = blob[2] * pow(dist/foclen, 2)
+
+    return (x, y, a)
 
 def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
     """Takes a picture, undistorts and runs operations to find 
@@ -90,8 +122,21 @@ def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
     top = np.hstack((tl, tr))
     bottom = np.hstack((bl, br))
     debug_frame = np.vstack((top, bottom))
+    # cv.imshow("dbg", debug_frame)
+    cv.imshow("draw", final_drawing)
+    # while (cv.waitKey(0) != ord('q')): {}
 
     # TODO Debug option to save pictures / videos to file
-
+    
     # TODO map pixels to millimeters! (pinhole camera math)
-    return [(0, 0, 0), (0, 0, 0)]
+    retval = []
+    for i in range(len(final_contours)):
+        M = cv.moments(final_contours[i])
+        # centroid:
+        cx = int(M['m10']/M['m00'])
+        cy = int(M['m01']/M['m00'])
+        a = cv.contourArea(final_contours[i])
+        retval.append(pinhole_calcs((cx, cy, a)))
+
+
+    return retval

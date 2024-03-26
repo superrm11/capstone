@@ -4,4 +4,7 @@ from visionops import process
 
 vc = cv.VideoCapture(0)
 
-process(vc)
+while(cv.waitKey(5) != ord('q')):
+    arr = process(vc)
+    if (len(arr) > 0):
+        print(arr)
