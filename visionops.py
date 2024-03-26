@@ -2,19 +2,7 @@
 import cv2 as cv
 import numpy as np
 
-mtx=[]
-dist=[]
-rvecs=[] 
-tvecs=[]
 
-def undistort(src: cv.Mat):
-    return []
-
-canny_thresh = 12
-canny_ratio = 3 # per OpenCV recommendation
-dilation = 10
-erosion = 10
-blur_kernel = 6
 
 def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
     """Takes a picture, undistorts and runs operations to find 
@@ -26,13 +14,24 @@ def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
     Returns:
         list[tuple[float, float, float]]: List of defect datapoints, in mm/mm^2 (x, y, area)
     """
+    mtx=np.array([[1.43053474e+03, 0.00000000e+00, 7.37142021e+02],
+        [0.00000000e+00, 1.40876133e+03, 5.39785147e+02],
+        [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]])
+    dist=np.array([[-0.24913637,  0.55272668,  0.00304293, -0.01298301, -0.51251071]])
+
+    canny_thresh = 12
+    canny_ratio = 3 # per OpenCV recommendation
+    dilation = 10
+    erosion = 10
+    blur_kernel = 6
+
     ret, src = cam.read()
     if not ret:
         print("Unable to grab image!")
         return []
-    
-    # TODO Undistort image here!
-    # src_undistorted = cv.undistort(src, )
+
+    # Correct for lens distortion (Must complete calibration first! mtx, dist!)
+    src = cv.undistort(src, mtx, dist)
 
     # Avoid the program crashing because of a large amount of contours from canny
     if(canny_thresh <= 1 or blur_kernel < 1):
