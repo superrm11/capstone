@@ -2,19 +2,39 @@
 import cv2 as cv
 import numpy as np
 
-mtx=[]
-dist=[]
-rvecs=[] 
-tvecs=[]
+def filter(contours):
+    min_area = 650
+    max_area = 3000
+    out = []
+    for i in range(len(contours)):
+        a = cv.contourArea(contours[i])
+        if(a > min_area and a < max_area):
+            out.append(contours[i])
+    return out
 
-def undistort(src: cv.Mat):
-    return []
+def pinhole_calcs(blob:tuple[int, int, int]) -> tuple [int, int, int]:
+    """Calculates the position & area of a blob in millimeters, given
+    pixel measurements.
 
-canny_thresh = 12
-canny_ratio = 3 # per OpenCV recommendation
-dilation = 10
-erosion = 10
-blur_kernel = 6
+    Args:
+        blob (tuple[int, int, int]): (x, y, area) in px, px, px^2
+
+    Returns:
+        tuple [int, int, int]: (x, y, area) in mm, mm, mm^2
+    """
+    dist=70 # mm from board
+    foclen = 595 # mm, calculated as needed
+    # 36 dist between points
+    # 68 dist to board
+    # pt 1: 175, 210
+    # pt 2: 490, 216
+    
+
+    x = blob[0] * dist / foclen
+    y = blob[1] * dist / foclen
+    a = blob[2] * pow(dist/foclen, 2)
+
+    return (x, y, a)
 
 def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
     """Takes a picture, undistorts and runs operations to find 
@@ -26,13 +46,24 @@ def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
     Returns:
         list[tuple[float, float, float]]: List of defect datapoints, in mm/mm^2 (x, y, area)
     """
+    mtx=np.array([[1.43053474e+03, 0.00000000e+00, 7.37142021e+02],
+        [0.00000000e+00, 1.40876133e+03, 5.39785147e+02],
+        [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]])
+    dist=np.array([[-0.24913637,  0.55272668,  0.00304293, -0.01298301, -0.51251071]])
+
+    canny_thresh = 12
+    canny_ratio = 3 # per OpenCV recommendation
+    dilation = 10
+    erosion = 10
+    blur_kernel = 6
+
     ret, src = cam.read()
     if not ret:
         print("Unable to grab image!")
         return []
-    
-    # TODO Undistort image here!
-    # src_undistorted = cv.undistort(src, )
+
+    # Correct for lens distortion (Must complete calibration first! mtx, dist!)
+    src = cv.undistort(src, mtx, dist)
 
     # Avoid the program crashing because of a large amount of contours from canny
     if(canny_thresh <= 1 or blur_kernel < 1):
@@ -91,8 +122,21 @@ def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
     top = np.hstack((tl, tr))
     bottom = np.hstack((bl, br))
     debug_frame = np.vstack((top, bottom))
+    # cv.imshow("dbg", debug_frame)
+    cv.imshow("draw", final_drawing)
+    # while (cv.waitKey(0) != ord('q')): {}
 
     # TODO Debug option to save pictures / videos to file
-
+    
     # TODO map pixels to millimeters! (pinhole camera math)
-    return [(0, 0, 0), (0, 0, 0)]
+    retval = []
+    for i in range(len(final_contours)):
+        M = cv.moments(final_contours[i])
+        # centroid:
+        cx = int(M['m10']/M['m00'])
+        cy = int(M['m01']/M['m00'])
+        a = cv.contourArea(final_contours[i])
+        retval.append(pinhole_calcs((cx, cy, a)))
+
+
+    return retval
