@@ -82,8 +82,7 @@ def edge_detect(img):
     return debug_frame
 
 
-
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(0, cv.CAP_V4L2)
 if not cap.isOpened():
     print("Failed to open camera :(")
     exit(-1)
