@@ -13,31 +13,46 @@ import qwiic_vl53l1x
 # - Generate map function from list of contours
 # - Client program - Spacebar to command start, socket to send commands / receive map
 
-HOST = '127.0.0.1'
-PORT = 5024
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ROBOT_HOST = '192.168.125.1'
+ROBOT_PORT = 5024
+robot_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+HMI_HOST = ''
+HMI_PORT = 1123
+hmi_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 while True:
     try:
-        client.connect((HOST, PORT))
+        robot_client.connect((ROBOT_HOST, ROBOT_PORT))
         break
     except:
-        print("Failed to connect, retrying in 1 second...")
+        print("Failed to connect to Robot, retrying in 1 second...")
 
     time.sleep(1)
-print("Client Connected.")
+print("Robot Connected.")
 
-def send(cmd):
+def send_to_robot(cmd):
     print("Sent \"" + cmd + "\" command to Jetson")
-    client.send(cmd.encode())
-def recv():
+    robot_client.send(cmd.encode())
+def recv_from_robot():
     retval = ""
     try:
-        retval = client.recv(1024).decode()
+        retval = robot_client.recv(1024).decode()
     except:
         pass
 
     return retval
+
+while True:
+    try:
+        hmi_client.connect((HMI_HOST, HMI_PORT))
+        break
+    except:
+        print("Failed to connect to HMI, retrying in 1 second...")
+
+    time.sleep(1)
+
+print("HMI Connected.")
 
 # 1 = error
 # 0 = OK
@@ -51,7 +66,7 @@ def wait_until(condition, timeout, interval):
         
 def wait_for_ok():
     print("Waiting for OK signal...")
-    ret = wait_until(lambda: recv() == "OK", 5, 0.1)
+    ret = wait_until(lambda: recv_from_robot() == "OK", 5, 0.1)
     if(ret == 1):
         print("Communication Error!")
         exit(1)
@@ -59,11 +74,11 @@ def wait_for_ok():
 
 def wait_for_done():
     print("Waiting for DONE signal...")
-    ret = wait_until(lambda: recv() == "DONE", 10, 0.1)
+    ret = wait_until(lambda: recv_from_robot() == "DONE", 10, 0.1)
     if(ret == 1):
         print("Watchdog error - robot took too long!")
         exit(1)
-    print("OK received. Continuing...")
+    print("DONE received. Continuing...")
 
 def get_lidar_mm():
     lidar.start_ranging()
@@ -84,27 +99,36 @@ else:
     print("Failed to initialize Lidar")
 lidar.set_distance_mode(1)
 
-
 while True:
     # Step 0 - Wait for HMI command to start!
     # Step 1 - take initial picture
     print("Taking picture...")
-    send("PIC") # Tell jetson to go to "picture position"
+    send_to_robot("PIC") # Tell jetson to go to "picture position"
     wait_for_ok()
     wait_for_done()
 
-    defect_list = process(vc) # Take the picture & process for possible defects
+    defect_list, vis_map = process(vc) # Take the picture & process for possible defects
 
     dist_list = []
     # Step 2 - Scan each point of interest for lidar depth
     for poi in defect_list:
-        send("LGOTO " + poi[0] + " " + poi[1])
+        send_to_robot("LGOTO " + poi[0] + " " + poi[1])
         wait_for_ok()
         wait_for_done()
         # Get lidar value
         d = get_lidar_mm()
         dist_list.append(d) #TODO offset needed
-        print("LIDAR distance: " + d + "mm")
+        print("X: " + poi[0] + "mm Y: " + poi[1] + "mm A: " + poi[2] + "mm^2 D: " + d + "mm")
+
+    # Cut out points that don't meet the depth / area requirement
+    final_poi_list = []
+    offset = 0 # Tune me based on distance!
+    for i in range(len(defect_list)):
+        a = defect_list[i][2]
+        d = dist_list[i]
+
+        if(a > 0 and d > 0): #Tune min area and distance!
+            final_poi_list.append([defect_list[i][0], defect_list[i][1], defect_list[i][2], dist_list[i]])
         
 
 

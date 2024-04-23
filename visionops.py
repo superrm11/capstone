@@ -38,7 +38,7 @@ def pinhole_calcs(blob:Tuple[int, int, int]) -> Tuple [int, int, int]:
 
     return (x, y, a)
 
-def process(cam:cv.VideoCapture) -> List[Tuple[float, float, float]]:
+def process(cam:cv.VideoCapture):
     """Takes a picture, undistorts and runs operations to find 
     information on defects
 
@@ -141,4 +141,4 @@ def process(cam:cv.VideoCapture) -> List[Tuple[float, float, float]]:
         retval.append(pinhole_calcs((cx, cy, a)))
 
 
-    return retval
+    return (retval,final_drawing)
