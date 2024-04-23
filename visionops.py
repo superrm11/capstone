@@ -1,6 +1,8 @@
 #!/bin/python3
 import cv2 as cv
 import numpy as np
+from typing import Tuple
+from typing import List
 
 def filter(contours):
     min_area = 650
@@ -12,7 +14,7 @@ def filter(contours):
             out.append(contours[i])
     return out
 
-def pinhole_calcs(blob:tuple[int, int, int]) -> tuple [int, int, int]:
+def pinhole_calcs(blob:Tuple[int, int, int]) -> Tuple [int, int, int]:
     """Calculates the position & area of a blob in millimeters, given
     pixel measurements.
 
@@ -36,7 +38,7 @@ def pinhole_calcs(blob:tuple[int, int, int]) -> tuple [int, int, int]:
 
     return (x, y, a)
 
-def process(cam:cv.VideoCapture) -> list[tuple[float, float, float]]:
+def process(cam:cv.VideoCapture) -> List[Tuple[float, float, float]]:
     """Takes a picture, undistorts and runs operations to find 
     information on defects
 
