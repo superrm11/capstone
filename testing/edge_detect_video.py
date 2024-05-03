@@ -18,6 +18,9 @@ dilation = 10
 erosion = 10
 blur_kernel = 6
 def edge_detect(img):
+    img = cv.rotate(img, cv.ROTATE_180)
+
+    
 
     # Avoid the program crashing because of a large amount of contours from canny
     if(canny_thresh <= 1 or blur_kernel < 1):
@@ -38,6 +41,11 @@ def edge_detect(img):
         hull = cv.convexHull(contours[i])
         hull_list.append(hull)
         cv.drawContours(hull_drawing, [hull], 0, 255, cv.FILLED)
+
+    blank_mask = np.zeros([1080, 1920], dtype=np.uint8)
+    pts = np.array([[555, 25], [1345, 20], [1340, 1030], [595, 1040]], np.int32)
+    frame_mask = cv.fillPoly(blank_mask, [pts], 255)
+    hull_drawing = cv.bitwise_and(hull_drawing, hull_drawing, mask=frame_mask)
     
     # Step 4 - Dilate the blob to further fill in holes
     if(dilation > 0): 
@@ -82,7 +90,7 @@ def edge_detect(img):
     return debug_frame
 
 
-cap = cv.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080,format=(string)NV12, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert !  appsink")
+cap = cv.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080,format=(string)NV12, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert !  appsink drop=1")
 if not cap.isOpened():
     print("Failed to open camera :(")
     exit(-1)

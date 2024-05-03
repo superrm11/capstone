@@ -13,22 +13,28 @@ objp[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 
-# vc = cv.VideoCapture(0)
-
+# vc = cv.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080,format=(string)NV12, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert !  appsink drop=1")
+# index = 0
 # while(not cv.waitKey(5) == ord('q')):
 #     ret, src = vc.read()
 #     img = cv.cvtColor(src, cv.COLOR_RGB2GRAY)
-#     if(not ret):
-#         continue
     
+#     print("finding contours...")
 #     ret, corners = cv.findChessboardCorners(img, (9, 6), None)
-
-#     src = cv.drawChessboardCorners(src, (9,6), corners, ret)
-#     cv.imshow("chess", src)
+#     print("eh?")
+#     if ret:
+#         print("Found!")
+#         prev = cv.drawChessboardCorners(src, (9,6), corners, ret)
+#         cv.imshow("chess", prev)
+#         if(cv.waitKey(0) == ord('y')):
+#             cv.imwrite("/home/jetson/calibration/pic"+index+".jpg", src)
+#             index+=1
+#     else:
+#         print("None found... :(")
 
 # exit()
 
-images = glob.glob('calibration2/*.jpg')
+images = glob.glob('robot_calibration/*.jpg')
 
 for fname in images:
     img = cv.imread(fname)
