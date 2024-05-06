@@ -6,16 +6,23 @@ from typing import List
 import cv2 as cv
 from visionops import process
 import qwiic_vl53l1x
+import serial
 
-# vc = cv.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080,format=(string)NV12, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert !  appsink drop=1")
-
+# LIVE VIEW TESTING
+# vc = cv.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1640, height=(int)1232,format=(string)NV12, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert !  appsink drop=1")
 # while True:
-#     vals, drawing = process(vc)
+#     try:
+#         vals, drawing = process(vc)
+#     except:
+#         vc.release()
+#     for pt in vals:
+#         cv.putText(drawing, 'X:{} Y:{}'.format(round(pt[0]), round(pt[1])), (int(round(pt[3])), int(round(pt[4])-20)), cv.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
+#     drawing = cv.resize(drawing, (1230, 924))
 #     cv.imshow("Map", drawing)
-#     print(vals)
-#     key = cv.waitKey()
-#     # if (key == ord('y')):
-#     #     cv.imwrite('output.jpg', drawing)
+#     # print(vals)
+#     key = cv.waitKey(1)
+#     if (key == ord('y')):
+#         cv.imwrite('output.jpg', drawing)
 #     if (key == ord('q')):
 #         break
 # vc.release()
@@ -37,25 +44,23 @@ import qwiic_vl53l1x
 # exit(0)
 
 # LIDAR Testing Code
-def get_lidar_mm():
-    lidar.start_ranging()
-    time.sleep(.005)
-    dist = lidar.get_distance()
-    time.sleep(.005)
-    lidar.stop_ranging()
-    return dist
-
-lidar = qwiic_vl53l1x.QwiicVL53L1X()
-retval = lidar.sensor_init()
-if retval == None:
-    print("Lidar initialized")
-else:
-    print("Failed to initialize Lidar")
-lidar.set_distance_mode(1)
-
-while True:
-    print(get_lidar_mm())
-    time.sleep(0.1)
+# def get_lidar_mm():
+#     lidar.start_ranging()
+#     time.sleep(.005)
+#     dist = lidar.get_distance()
+#     time.sleep(.005)
+#     lidar.stop_ranging()
+#     return dist
+# lidar = qwiic_vl53l1x.QwiicVL53L1X()
+# retval = lidar.sensor_init()
+# if retval == None:
+#     print("Lidar initialized")
+# else:
+#     print("Failed to initialize Lidar")
+# lidar.set_distance_mode(1)
+# while True:
+#     print(get_lidar_mm())
+#     time.sleep(0.1)
 
 # TODO 
 # - Mask out-of-bounds area before canny
@@ -64,7 +69,26 @@ while True:
 # - Generate map function from list of contours
 # - Client program - Spacebar to command start, socket to send commands / receive map
 
-ROBOT_HOST = '192.168.125.1'
+# Initialize Camera (jetson CSI port)
+try:
+    vc = cv.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1640, height=(int)1232,format=(string)NV12, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert !  appsink drop=1")
+except:
+    print("Error starting camera - aborting...")
+    exit(1)
+# Initialize LIDAR (i2c 1, address 0x52)
+lidar = qwiic_vl53l1x.QwiicVL53L1X()
+retval = lidar.sensor_init()
+if retval == None:
+    print("Lidar initialized")
+else:
+    print("Failed to initialize Lidar")
+lidar.set_distance_mode(1)
+
+port = serial.Serial("/dev/ttyACM0", 9600)
+print("Serial initialized")
+
+
+ROBOT_HOST = '10.3.39.4'
 ROBOT_PORT = 5024
 robot_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -80,7 +104,7 @@ while True:
 print("Robot Connected.")
 
 def send_to_robot(cmd):
-    print("Sent \"" + cmd + "\" command to Jetson")
+    print("Sent \"" + cmd + "\" command to Robot")
     robot_client.send(cmd.encode())
 
 def recv_from_robot():
@@ -100,7 +124,6 @@ def wait_until(condition, timeout, interval):
         end = time.time()
         if(end - start > timeout):
             return 1
-    0
         
 def wait_for_ok():
     print("Waiting for OK signal...")
@@ -124,44 +147,73 @@ def get_lidar_mm():
     print(lidar.get_distance())
     time.sleep(.005)
     lidar.stop_ranging()
-        
-# Initialize Camera (jetson CSI port)
-vc = cv.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080,format=(string)NV12, framerate=(fraction)30/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert !  appsink drop=1")
-# vc = cv.VideoCapture(0)
-# Initialize LIDAR (i2c 1, address 0x52)
-lidar = qwiic_vl53l1x.QwiicVL53L1X()
-retval = lidar.sensor_init()
-if retval == None:
-    print("Lidar initialized")
-else:
-    print("Failed to initialize Lidar")
-lidar.set_distance_mode(1)
+
+cv.namedWindow("Defect Map")
+cv.startWindowThread()
+def show_map(img, pts):
+    for pt in pts:
+        cv.putText(img, 'X:{} Y:{}'.format(round(pt[0]), round(pt[1])), (int(round(pt[3])), int(round(pt[4])-20)), cv.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
+    img = cv.resize(img, (1230, 924))
+    cv.imshow("Defect Map", img)
 
 while True:
-    input("Press Enter to continue.")
+    # input("Press Enter to continue.")
 
     # Step 0 - Wait for HMI command to start!
     # Step 1 - take initial picture
     print("Taking picture...")
-    send_to_robot(b"PIC") # Tell jetson to go to "picture position"
+    send_to_robot("PIC") # Tell jetson to go to "picture position"
     wait_for_ok()
     wait_for_done()
 
-    defect_list, vis_map = process(vc) # Take the picture & process for possible defects
+    start_time = time.time()
+    vis_map = None
+    defect_list = None
+    while (time.time() - start_time < 2):
+        # Allow white balence & exposure to settle
+        defect_list, vis_map = process(vc)
+        show_map(vis_map, defect_list)
 
-    dist_list = []
-    # Step 2 - Scan each point of interest for lidar depth
-    for poi in defect_list:
-        send_to_robot("LGOTO " + poi[0] + " " + poi[1])
+    defect_list, vis_map = process(vc)
+    show_map(vis_map, defect_list)
+
+    send_to_robot("ENDPIC")
+    wait_for_ok()
+    wait_for_done()
+
+    print("{} Defects Found!".format(len(defect_list)))
+
+    for pt in defect_list:
+        print("Dispensing Spackle...")
+        send_to_robot("DISP")
         wait_for_ok()
         wait_for_done()
-        # Get lidar value
-        d = get_lidar_mm()
-        dist_list.append(d) #TODO offset needed
-        print("X: " + poi[0] + "mm Y: " + poi[1] + "mm A: " + poi[2] + "mm^2 D: " + d + "mm")
 
-    cv.imshow("Defect Map", vis_map)
-    cv.waitKey()
+        # port.write("F".encode())
+        port.write("F".encode())
+        port.write("B".encode())
+        # port.write("B".encode())
+        time.sleep(3)
+
+        print("Repairing at {}, {}".format(pt[0], pt[1]))
+        send_to_robot("RGOTO {},{}".format(int(pt[0]), int(pt[1])))
+        wait_for_ok()
+        wait_for_done()
+
+    input("Press Enter to End.")
+    cv.destroyAllWindows()
+    exit(0)
+
+    # dist_list = []
+    # Step 2 - Scan each point of interest for lidar depth
+    # for poi in defect_list:
+    #     send_to_robot("LGOTO " + poi[0] + " " + poi[1])
+    #     wait_for_ok()
+    #     wait_for_done()
+    #     # Get lidar value
+    #     d = get_lidar_mm()
+    #     dist_list.append(d) #TODO offset needed
+    #     print("X: " + poi[0] + "mm Y: " + poi[1] + "mm A: " + poi[2] + "mm^2 D: " + d + "mm")
 
     # Cut out points that don't meet the depth / area requirement
     final_poi_list = []

@@ -5,13 +5,8 @@ from typing import Tuple
 from typing import List
 
 def crop(img):
-    # in camera pos:
-    #   upper left = 562, 29
-    #   upper right = 1350, 22
-    #   lower left = 596, 1039
-    #   lower right = 1344, 1034
-    blank_mask = np.zeros([1080, 1920], dtype=np.uint8)
-    pts = np.array([[562, 29], [1350, 22], [1344, 1034], [596, 1039]], np.int32)
+    blank_mask = np.zeros(img.shape, dtype=np.uint8)
+    pts = np.array([[541, 440], [1041, 445], [1040, 1099], [549, 1102]], np.int32)
     frame_mask = cv.fillPoly(blank_mask, [pts], 255)
     ret = cv.bitwise_and(img, img, mask=frame_mask)
 
@@ -19,7 +14,7 @@ def crop(img):
 
 def filter(contours):
     min_area = 4
-    max_area = 3000
+    max_area = 600
     out = []
     for i in range(len(contours)):
         a = cv.contourArea(contours[i])
@@ -37,10 +32,10 @@ def pinhole_calcs(blob:Tuple[int, int, int]) -> Tuple [int, int, int]:
     Returns:
         tuple [int, int, int]: (x, y, area) in mm, mm, mm^2
     """
-    dist=1320 # mm from board
-    foclen = 2596 # mm, calculated as needed
-    x_offs = 570
-    y_offs = 30
+    dist=1030 # mm from board
+    foclen = 1337 # mm, calculated as needed
+    x_offs = 536
+    y_offs = 122
     # 36 dist between points
     # 68 dist to board
     # pt 1: 175, 210
@@ -48,7 +43,7 @@ def pinhole_calcs(blob:Tuple[int, int, int]) -> Tuple [int, int, int]:
     
 
     x = (blob[0] - x_offs) * dist / foclen
-    y = (blob[1] - y_offs) * dist / foclen
+    y = (1232 - blob[1] - y_offs) * dist / foclen
     a = blob[2] * pow(dist/foclen, 2)
 
     return (x, y, a)
@@ -73,7 +68,7 @@ def process(cam:cv.VideoCapture):
     canny_ratio = 3 # per OpenCV recommendation
     dilation = 10
     erosion = 10
-    blur_kernel = 6
+    blur_kernel = 5
 
     ret, src = cam.read()
     if not ret:
@@ -96,6 +91,12 @@ def process(cam:cv.VideoCapture):
     edge = cv.Canny(blured, canny_thresh, canny_thresh*canny_ratio)
     contours,_  = cv.findContours(edge, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
+    # Crop & find contours again
+    contour_map = np.zeros((edge.shape[0], edge.shape[1], 1), dtype=np.uint8)
+    cv.drawContours(contour_map, contours, -1, 255, cv.FILLED)
+    contour_map = crop(contour_map)
+    contours,_  = cv.findContours(contour_map, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+
     # Step 3 - Convex hull operation to fill in holes (in the hole), convert to binary image
     hull_drawing = np.zeros((edge.shape[0], edge.shape[1], 1), dtype=np.uint8)
     hull_list = []
@@ -103,9 +104,6 @@ def process(cam:cv.VideoCapture):
         hull = cv.convexHull(contours[i])
         hull_list.append(hull)
         cv.drawContours(hull_drawing, [hull], 0, 255, cv.FILLED)
-
-    # Crop the image
-    hull_drawing = crop(hull_drawing)
     
     # Step 4 - Dilate the blob to further fill in holes
     if(dilation > 0): 
@@ -157,7 +155,8 @@ def process(cam:cv.VideoCapture):
         cx = int(M['m10']/M['m00'])
         cy = int(M['m01']/M['m00'])
         a = cv.contourArea(final_contours[i])
-        retval.append((cx, cy))#pinhole_calcs((cx, cy, a)))
+        mm_vals = pinhole_calcs((cx, cy, a))
+        retval.append((mm_vals[0], mm_vals[1], mm_vals[2], cx, cy))
 
 
     return (retval,final_drawing)
