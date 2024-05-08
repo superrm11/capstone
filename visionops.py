@@ -68,7 +68,7 @@ def process(cam:cv.VideoCapture):
     canny_ratio = 3 # per OpenCV recommendation
     dilation = 10
     erosion = 10
-    blur_kernel = 5
+    blur_kernel = 3
 
     ret, src = cam.read()
     if not ret:

@@ -1,0 +1,182 @@
+MODULE CAPSTONE
+    
+    VAR robtarget SurfRepSpackleStart;
+    VAR string clientip;
+    VAR num xcoord;
+    VAR num posX;
+    VAR num ycoord;
+    VAR num posY;
+    VAR string socketIn;
+    VAR bool result;
+    CONST robtarget SurfRepPicLoc := [[-23.73,4.81,565.56],[0.484655,-0.516621,0.502092,-0.496101],[-1,0,-2,4],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget SurfRepPicInter := [[350.27,0.15,634.11],[0.48058,-0.515297,0.508865,-0.494539],[-1,-1,-2,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget SurfRepHome := [[553.66,-3.30,415.97],[0.493218,-0.495264,0.500811,-0.510527],[0,0,-2,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget SurfRepDispCollect := [[345.78,-392.04,122.56],[0.304366,-0.631582,0.639662,-0.315115],[-1,-2,-1,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget SurfRepDrywallOrigin := [[-400.49,-1.78,-6.07],[0.178793,0.684357,-0.688049,-0.162103],[0,-1,0,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget SurfRepDrywallOriginAlt := [[-396.51,-3.91,-6.33],[0.208019,0.978104,-0.0038342,0.00504213],[0,0,-2,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget SurfRepLidarOrigin := [[-422.77,42.28,2.90],[0.00393479,-0.00498792,-0.999979,-0.000867244],[0,0,0,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+
+ PROC main()
+     !TestPath;
+     MoveJ SurfRepHome,v200,fine,SpackleTCP,\WObj:=wobj0;
+     StartupSocket;
+     
+     WHILE TRUE DO
+         SocketParse;
+     ENDWHILE
+     EXIT;
+ENDPROC
+
+    PROC TestPath()
+        MoveJ SurfRepHome, v200, z50, SpackleTCP\WObj:=wobj0;
+        MoveJ SurfRepPicInter, v500, z100, SpackleTCP\WObj:=wobj0;
+        MoveJ SurfRepPicLoc, v500, fine, SpackleTCP\WObj:=wobj0;
+        WaitTime 2;
+        MoveJ SurfRepPicInter, v500, z100, SpackleTCP\WObj:=wobj0;
+        
+        Dispenser;
+        SurfRepSpackleStart := offs (SurfRepDrywallOrigin, 207, 264, 0); 
+        Spackle;
+        Dispenser;
+        SurfRepSpackleStart := offs (SurfRepDrywallOrigin, 203, 384, 0); 
+        Spackle;
+        MoveJ SurfRepHome, v200, fine, SpackleTCP\WObj:=wobj0;
+        EXIT;
+    ENDPROC
+    
+    PROC Dispenser()
+        !Dispenser Spackle Operation
+        MoveJ SurfRepHome, v500, z200, SpackleTCP\WObj:=wobj0;
+        MoveJ offs(SurfRepDispCollect, -40,0,100),v500,z20,SpackleTCP\WObj:=wobj0;
+        MoveJ offs(SurfRepDispCollect, -40,0,-20),v500,z20,SpackleTCP\WObj:=wobj0;
+        MoveJ SurfRepDispCollect,v100,fine,SpackleTCP\WObj:=wobj0;
+        !WaitTime 6;
+        !MoveJ Offs(SurfRepDispCollect,0,30,0),v5,fine,SpackleTCP\WObj:=wobj0;
+        !MoveJ Offs(SurfRepDispCollect,0,-30,0),v5,fine,SpackleTCP\WObj:=wobj0;
+        !WaitTime 2;
+        !MoveJ offs(SurfRepDispCollect, -40,0,-20),v500,z20,SpackleTCP\WObj:=wobj0;
+        !MoveJ offs(SurfRepDispCollect, -40,0,100),v500,z20,SpackleTCP\WObj:=wobj0;
+        !ConfL \Off;
+        !movej pHome,v500,fine,SpackleTCP\WObj:=wobj0;
+        !MoveAbsJ Disp0,v500,fine,SpackleTCP\WObj:=wobj0;
+        !oveabsj Disp1,v500,fine,SpackleTCP\WObj:=wobj0;
+        !moveL DispLS,v500,fine,SpackleTCP\WObj:=wobj0;
+        !moveabsj Disp1,v500,fine,SpackleTCP\WObj:=wobj0;
+        !moveL offs(DispCollect,3,-15,2),v200,fine,SpackleTCP\WObj:=wobj0;
+        !WaitTime 3.5;
+        !moveabsj Disp1,v500,fine,SpackleTCP\WObj:=wobj0;
+        !Spackle Collected 
+    ENDPROC
+    
+!    PROC Tester()
+!        ConfL \off;
+!        MoveAbsJ Disp0,v500,fine,SpackleTCP\WObj:=wobj0;
+!        moveabsj Disp1,v500,fine,SpackleTCP\WObj:=wobj0;
+!        moveL DispLS,v500,fine,SpackleTCP\WObj:=wobj0;
+!        moveabsj Disp1,v500,fine,SpackleTCP\WObj:=wobj0;
+!        moveL offs(DispCollect,-3,2,1),v200,fine,SpackleTCP\WObj:=wobj0;
+!        WaitTime 3.5;
+!        moveabsj Disp1,v500,fine,SpackleTCP\WObj:=wobj0;
+!    ENDPROC
+    
+    PROC Spackle()
+        ConfL \Off;
+        MoveJ offs(SurfRepDispCollect, -40,0,-20),v500,z20,SpackleTCP\WObj:=wobj0;
+        MoveJ offs(SurfRepDispCollect, -40,0,100),v500,z20,SpackleTCP\WObj:=wobj0;
+        MoveJ SurfRepHome,v500,z100,SpackleTCP\WObj:=wobj0;
+        IF ycoord > 150 THEN
+            SurfRepSpackleStart := offs (SurfRepDrywallOrigin, xcoord, ycoord, 0); 
+            MoveJ offs (SurfRepSpackleStart, -5, -10, 30),v500,z20,SpackleTCP\WObj:=dryWall;
+            moveL Offs (SurfRepSpackleStart, -5, -10, -15),v20,z10,SpackleTCP\WObj:=dryWall; 
+            moveL Offs (SurfRepSpackleStart, 25, -10, -15),v20,z10,SpackleTCP\WObj:=dryWall;
+            moveL Offs (SurfRepSpackleStart, 25, -10, 30),v20,z20,SpackleTCP\WObj:=dryWall;
+        ELSE
+            SurfRepSpackleStart := offs (SurfRepDrywallOriginAlt, xcoord, ycoord, 0); 
+            MoveJ offs (SurfRepSpackleStart, -10, -5, 30),v500,z20,SpackleTCP\WObj:=dryWall;
+            moveL Offs (SurfRepSpackleStart, -10, -5, -15),v20,z10,SpackleTCP\WObj:=dryWall;
+            moveL Offs (SurfRepSpackleStart, -10, 25, -15),v20,z10,SpackleTCP\WObj:=dryWall;
+            moveL Offs (SurfRepSpackleStart, -10, 25, 30),v20,z20,SpackleTCP\WObj:=dryWall;
+            
+        ENDIF
+        MoveJ SurfRepHome,v500,z100,SpackleTCP\WObj:=wobj0;
+    ENDPROC
+    
+    PROC StartupSocket()
+        IF SocketGetStatus(server_socket) <> SOCKET_CREATED THEN
+            SocketCreate server_socket;
+            SocketBind server_socket,"10.3.39.4",5024; 
+            SocketListen server_socket;
+        ENDIF
+        
+        IF SocketGetStatus(client_socket) <> SOCKET_CONNECTED THEN
+            SocketAccept server_socket,client_socket\ClientAddress:=clientip;
+        ENDIF
+        
+    ENDPROC
+    
+   PROC SocketParse()
+        
+    TPWrite clientip;
+    socketIn := "";
+    WHILE socketIn = "" DO
+        SocketReceive client_socket\Str:=socketIn; 
+    ENDWHILE
+        
+    IF socketIn = "PIC" THEN
+        SocketSend client_socket \Str:="OK";
+        MoveJ SurfRepPicInter, v500, z100, SpackleTCP\WObj:=wobj0;
+        MoveJ SurfRepPicLoc, v500, fine, SpackleTCP\WObj:=wobj0;
+        SocketSend client_socket \Str:="DONE";
+    ELSEIF socketIn = "ENDPIC" THEN
+        SocketSend client_socket \Str:="OK";
+        MoveJ SurfRepPicInter, v500, z100, SpackleTCP\WObj:=wobj0;
+        MoveJ SurfRepHome, v500, z100, SpackleTCP\WObj:=wobj0;
+        SocketSend client_socket \Str:="DONE";
+    ELSEIF socketIn = "DISP" THEN
+        SocketSend client_socket \Str:="OK";
+        Dispenser;
+        SocketSend client_socket \Str:="DONE";
+        
+    ELSEIF StrMatch(socketIn, 1, "RGOTO") = 1 THEN
+        ! Wait for X coordinate
+        posX:=StrFind(socketIn,1," ");
+        posY:=StrFind(socketIn,1,",");
+    
+        TPWrite ValToStr(posX) + " " + ValToStr(posY);
+        result:=StrToVal(StrPart(socketIn, posX+1, posY-posX-1),xcoord);
+        result:=StrToVal(StrPart(socketIn, posY+1, StrLen(socketIn)-posY),ycoord);
+        TPWrite "X" + ValToStr(xcoord) + " Y" + ValToStr(ycoord);
+        !TPWrite ValToStr(StrLen(socketIn));
+        !TPWrite "|"+StrPart(socketIn, posX+1, posY-posX-1) + "|" + StrPart(socketIn, posY+1, StrLen(socketIn)-posY)+"|";
+        
+        SocketSend client_socket \Str:="OK";
+        
+        Spackle;
+        SocketSend client_socket \Str:="DONE";
+    ELSEIF StrMatch(socketIn, 1, "LGOTO") = 1 THEN
+        !Dont use
+        EXIT;
+        posX:=StrFind(socketIn,1," ");
+        posY:=StrFind(socketIn,1,",");
+    
+        TPWrite ValToStr(posX) + " " + ValToStr(posY);
+        result:=StrToVal(StrPart(socketIn, posX+1, posY-posX-1),xcoord);
+        result:=StrToVal(StrPart(socketIn, posY+1, StrLen(socketIn)-posY),ycoord);
+        TPWrite "X" + ValToStr(xcoord) + " Y" + ValToStr(ycoord);
+        
+        SocketSend client_socket \Str:="OK";
+        MoveL offs(SurfRepLidarOrigin,xcoord,ycoord,0),v200,z100,SpackleTCP\WObj:=dryWall;
+        WaitTime 1;
+        SocketSend client_socket \Str:="DONE";
+    ENDIF
+    
+    !posX:=StrFind(coordinates,1,",");
+    !posY:=StrFind(coordinates,posX+1,",");
+
+    !result:=StrToVal(StrPart(coordinates,1,posX-1),xcoord);
+    !result:=StrToVal(StrPart(coordinates,posX+1,posY-posX-1),ycoord);
+    !TPWrite coordinates;
+
+ENDPROC
+
+ENDMODULE
